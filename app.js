@@ -10,7 +10,9 @@ const restaurants = [
     sourceName: '愛食記／店家訂位頁',
     photoSource: 'https://www.ubereats.com/tw/store/客家本色-竹北店/G8B9yn0kXi6078MMseusjg',
     photoName: '店家 Uber Eats 頁面',
-    images: ['https://tb-static.uber.com/prod/image-proc/processed_images/dbc5c5cfab370a17b04018822d5fa380/5283d81c664b43c5f57a3a186d273063.jpeg']
+    extraPhotoSource: 'https://sunnypoen101.pixnet.net/blog/posts/921543360442434894',
+    extraPhotoName: '雞蛋糕竹北店食記',
+    images: ['https://tb-static.uber.com/prod/image-proc/processed_images/dbc5c5cfab370a17b04018822d5fa380/5283d81c664b43c5f57a3a186d273063.jpeg','https://pimg.1px.tw/blog/sunnypoen101/post/921543360442434894/923332675786935066.jpg','https://pimg.1px.tw/blog/sunnypoen101/post/921543360442434894/923332979047696685.jpg']
   },
   {
     name: '彼刻 Piccola Enoteca', type: '義式餐酒館',
@@ -20,8 +22,8 @@ const restaurants = [
     map: 'https://maps.app.goo.gl/k3yaar41cvi19VsC7',
     details: 'https://www.piccolaenoteca.com/menu',
     source: 'https://www.piccolaenoteca.com/menu', sourceName: '彼刻官方菜單',
-    photoSource: 'https://www.piccolaenoteca.com/', photoName: '彼刻官方網站',
-    images: ['https://lirp.cdn-website.com/5d5e4871/dms3rep/multi/opt/20181205-_DSC9351-2-1920w.jpg','https://lirp.cdn-website.com/5d5e4871/dms3rep/multi/opt/20181204-_DSC8802-2-1920w.jpg']
+    photoSource: 'https://q82465.pixnet.net/blog/posts/12227351509', photoName: '竹亭聽雨彼刻食記',
+    images: ['https://pimg.1px.tw/q82465/1755097918-3020633593-g.jpg','https://pimg.1px.tw/q82465/1755097918-2886917142-g.jpg','https://pimg.1px.tw/q82465/1755097915-757661010-g.jpg']
   },
   {
     name: '暖肴聚所｜台菜料理', type: '當代台菜',
@@ -32,7 +34,8 @@ const restaurants = [
     details: 'https://ground-food.com/brands/yu-dew',
     source: 'https://ground-food.com/brands/yu-dew', sourceName: '葛朗餐飲官方網站',
     photoSource: 'https://ground-food.com/brands/yu-dew', photoName: '葛朗餐飲官方網站',
-    images: ['https://ground-food.com/wp-content/uploads/2026/08/DSC_4183-800x533.jpg']
+    imageDescriptions: ['暖肴台菜合菜餐點','嶼燒・暖肴共用庭院與入口','嶼燒・暖肴建築外觀'],
+    images: ['https://ground-food.com/wp-content/uploads/2026/08/DSC_4183-800x533.jpg','https://ground-food.com/wp-content/uploads/2023/07/ASH1347-800x533.jpg','https://ground-food.com/wp-content/uploads/2023/04/ASH1352-800x533.jpg']
   },
   {
     name: '呷奔來坐 懷舊食客', type: '古早味熱炒・客家菜',
@@ -43,7 +46,7 @@ const restaurants = [
     details: 'https://www.gomaji.com/store/129565',
     source: 'https://carlming.net/24039', sourceName: '卡爾茗食記（2024）',
     photoSource: 'https://www.gomaji.com/store/129565', photoName: 'Gomaji 店家頁面',
-    images: ['https://picdn.gomaji.com/uploads/stores/565/129565/226136/IMG_0033.jpg','https://picdn.gomaji.com/uploads/stores/565/129565/226136/IMG_0009.jpg']
+    images: ['https://picdn.gomaji.com/uploads/stores/565/129565/226136/IMG_0033.jpg','https://picdn.gomaji.com/uploads/stores/565/129565/226136/IMG_0009.jpg','https://picdn.gomaji.com/uploads/stores/565/129565/226136/IMG_0010.jpg']
   }
 ];
 
@@ -57,7 +60,7 @@ restaurants.forEach((item, index) => {
   const card = document.createElement('article'); card.className = 'card';
   const photo = document.createElement('div'); photo.className = 'image-wrap';
   const img = document.createElement('img');
-  img.src = item.images[0]; img.alt = `${item.name}餐廳或餐點照片`;
+  img.src = item.images[0]; img.alt = item.imageDescriptions?.[0] || `${item.name}餐廳或餐點照片 1`;
   img.loading = index > 1 ? 'lazy' : 'eager'; img.decoding = 'async';
   img.addEventListener('error', () => { img.hidden = true; });
   const overlay = document.createElement('div'); overlay.className = 'overlay';
@@ -67,14 +70,24 @@ restaurants.forEach((item, index) => {
   caption.append(type, name); photo.append(img, overlay, caption);
   if (item.images.length > 1) {
     let current = 0;
+    const photoTarget = document.createElement('button');
+    photoTarget.type = 'button'; photoTarget.className = 'photo-target';
+    photoTarget.setAttribute('aria-label', `查看${item.name}下一張照片`);
+    photoTarget.title = '點擊照片切換下一張';
+    photoTarget.append(img); photo.prepend(photoTarget);
     const next = document.createElement('button'); next.type = 'button'; next.className = 'photo-button';
     next.textContent = `照片 1 / ${item.images.length}`;
-    next.setAttribute('aria-label', `查看${item.name}下一張照片`);
-    next.addEventListener('click', () => {
+    next.setAttribute('aria-label', `${item.name}照片 1 / ${item.images.length}，切換下一張`);
+    const advance = () => {
       current = (current + 1) % item.images.length;
       img.hidden = false; img.src = item.images[current];
+      img.alt = item.imageDescriptions?.[current] || `${item.name}餐廳或餐點照片 ${current + 1}`;
       next.textContent = `照片 ${current + 1} / ${item.images.length}`;
-    }); photo.append(next);
+      next.setAttribute('aria-label', `${item.name}照片 ${current + 1} / ${item.images.length}，切換下一張`);
+    };
+    photoTarget.addEventListener('click', advance);
+    next.addEventListener('click', advance);
+    photo.append(next);
   }
   const content = document.createElement('div'); content.className = 'content';
   const info = document.createElement('dl'); info.className = 'info';
@@ -86,6 +99,7 @@ restaurants.forEach((item, index) => {
   actions.append(externalLink(item.details, index === 1 ? '查看菜單' : '餐廳資訊', 'btn btn-secondary'), externalLink(item.map, '查看地圖', 'btn btn-dark'));
   const source = document.createElement('div'); source.className = 'source';
   source.append('資料：', externalLink(item.source, item.sourceName), ' · 照片：', externalLink(item.photoSource, item.photoName));
+  if (item.extraPhotoSource) source.append('／', externalLink(item.extraPhotoSource, item.extraPhotoName));
   content.append(info, actions, source); card.append(photo, content);
   document.getElementById('restaurant-grid').append(card);
 });
