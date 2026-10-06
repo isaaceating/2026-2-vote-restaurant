@@ -10,7 +10,11 @@
 
 ## 部署
 
-GitHub Pages 選擇 main 分支的根目錄即可。新 Google 表單建立後，將作答者連結填入 `config.js`。
+GitHub Pages 使用 main 分支的根目錄。新 Google 表單作答連結已填入 `config.js`；表單已發布，作答範圍為 Lumens Digital Optics Inc.，收集已驗證電子郵件。
+
+網站：https://isaaceating.github.io/2026-2-vote-restaurant/
+
+表單編輯：https://docs.google.com/forms/d/1sEn5G_RdLKfjyjQH6lMQz8wPDXxZCwGQHWquRBGv-Fs/edit
 
 ## 資料與照片
 
