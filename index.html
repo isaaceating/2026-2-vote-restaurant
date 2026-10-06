@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="2026 下半年部門聚餐：比較四家候選餐廳的地址、價位與特色，填寫參加意願與餐廳票選。">
+  <title>2026 下半年部門聚餐餐廳票選</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <section class="hero" aria-labelledby="event-title">
+      <div class="badge">部門聚餐 · 餐廳票選</div>
+      <h1 id="event-title">2026 下半年部門聚餐</h1>
+      <p class="desc">四家餐廳，選出這次想一起吃的那一家。</p>
+      <div class="event-details">
+        <div><span>聚餐日期</span><strong id="event-date">TBD</strong></div>
+        <div><span>投票截止</span><strong id="event-deadline">TBD</strong></div>
+        <div><span>候選餐廳</span><strong>4 家</strong></div>
+      </div>
+      <div class="vote-box">
+        <div><div class="label">一起決定這次的聚餐</div><h2>參加意願與餐廳投票</h2><p id="vote-status">表單準備中，開放後即可填寫。</p></div>
+        <a class="btn btn-primary" id="vote-link" aria-disabled="true">表單準備中</a>
+      </div>
+    </section>
+    <div class="section-heading"><h2>本次候選餐廳</h2><p>先看看地址、價位與特色，再選出你的心頭好。</p></div>
+    <section class="grid" id="restaurant-grid" aria-label="四家候選餐廳"></section>
+    <noscript><p>請啟用 JavaScript 以查看餐廳介紹。</p></noscript>
+    <p class="price-note">價位為公開資料參考，非本次聚餐報價；實際費用依店家菜單、人數與點餐內容為準。</p>
+    <footer>2026 下半年部門聚餐 · 一起吃飯，一起聊聊。</footer>
+  </main>
+</body>
+</html>
