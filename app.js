@@ -112,5 +112,4 @@ if (/^https:\/\/(docs\.google\.com\/forms\/|forms\.gle\/)/.test(config.formUrl))
   const link = document.getElementById('vote-link');
   link.href = config.formUrl; link.target = '_blank'; link.rel = 'noopener noreferrer';
   link.removeAttribute('aria-disabled'); link.textContent = '前往投票';
-  document.getElementById('vote-status').textContent = '請填寫參加意願，並選擇你想去的餐廳。';
 }
