@@ -96,7 +96,7 @@ restaurants.forEach((item, index) => {
     dt.textContent = label; dd.textContent = value; row.append(dt, dd); info.append(row);
   });
   const actions = document.createElement('div'); actions.className = 'actions';
-  actions.append(externalLink(item.details, index === 1 ? '查看菜單' : '餐廳資訊', 'btn btn-secondary'), externalLink(item.map, '查看地圖', 'btn btn-dark'));
+  actions.append(externalLink(item.details, '餐廳資訊', 'btn btn-secondary'), externalLink(item.map, '查看地圖', 'btn btn-dark'));
   const source = document.createElement('div'); source.className = 'source';
   source.append('資料：', externalLink(item.source, item.sourceName), ' · 照片：', externalLink(item.photoSource, item.photoName));
   if (item.extraPhotoSource) source.append('／', externalLink(item.extraPhotoSource, item.extraPhotoName));
